@@ -1,0 +1,12 @@
+GeneratedFiles/
+Debug/
+Release/
+*.exe
+*.dll
+*.pdb
+*.obj
+*.user
+*.suo
+*.opensdf
+*.sdf
+*.ini

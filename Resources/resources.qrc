@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/app_resources">
+        <file>images/switch_on.bmp</file>
+        <file>images/switch_off.bmp</file>
+        <file>images/refresh.ico</file>
+        <file>images/wifi_off.ico</file>
+        <file>images/wifi_on.ico</file>
+    </qresource>
+</RCC>
