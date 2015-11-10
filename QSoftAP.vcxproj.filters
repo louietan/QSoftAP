@@ -149,6 +149,9 @@
     <ClCompile Include="src\app_settings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\ui\add_sharing_dialog.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="include\wlan\hosted_wlan.h">
@@ -184,6 +187,9 @@
     <CustomBuild Include="include\wlan\wlan_host.h">
       <Filter>Header Files\wlan</Filter>
     </CustomBuild>
+    <CustomBuild Include="forms\add_sharing.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\network\net_utils.h">
@@ -212,6 +218,12 @@
     </ClInclude>
     <ClInclude Include="include\commons.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_add_sharing.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ui\add_sharing_dialog.h">
+      <Filter>Header Files\ui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

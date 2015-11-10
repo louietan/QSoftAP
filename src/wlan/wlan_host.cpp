@@ -7,9 +7,9 @@ namespace wlan {
 
 using network::NetUtils;
 
-WlanHost::WlanHost(const WLAN_HOSTED_NETWORK_PEER_STATE &peer) : peer_state_(peer)
-{
-    this->mac_address_hex = NetUtils::readableMacAddress(PUCHAR(peer.PeerMacAddress));
+WlanHost::WlanHost(const WLAN_HOSTED_NETWORK_PEER_STATE &peer)
+    : peer_state_(peer) {
+  this->mac_address_hex =
+      NetUtils::readableMacAddress(PUCHAR(peer.PeerMacAddress));
 }
-
 }

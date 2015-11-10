@@ -4,52 +4,42 @@
 
 #include <NetCon.h>
 
-namespace network
-{
-class IcsConnection
-{
-    friend void swap(IcsConnection &lhs, IcsConnection &rhs);
+namespace network {
 
-  public:
-    IcsConnection() {}
-    IcsConnection(INetConnection *conn, INetSharingManager *mgr);
-    IcsConnection(const IcsConnection &other);
-    IcsConnection &operator=(IcsConnection rhs);
-    ~IcsConnection();
+class IcsConnection {
+  friend void swap(IcsConnection &lhs, IcsConnection &rhs);
 
-    INetConnection *iNetConnection() const {
-        return this->conn_;
-    }
-    INetSharingConfiguration *config() const {
-        return this->config_;
-    }
-    INetConnectionProps *props() const {
-        return this->props_;
-    }
+ public:
+  IcsConnection() {}
+  IcsConnection(INetConnection *conn, INetSharingManager *mgr);
+  IcsConnection(const IcsConnection &other);
+  IcsConnection &operator=(IcsConnection rhs);
+  ~IcsConnection();
 
-    std::wstring name() const {
-        return this->name_;
-    }
-    std::string guid() const {
-        return this->guid_;
-    }
-    bool sharingEnabled() const;
-    bool isPublic() const;
-    bool isPrivate() const;
+  INetConnection *iNetConnection() const { return this->conn_; }
+  INetSharingConfiguration *config() const { return this->config_; }
+  INetConnectionProps *props() const { return this->props_; }
 
-    void enableAsPrivate();
-    void enableAsPublic();
-  private:
-    void addRef();
-    void releaseRef();
-    bool valid();
+  std::wstring name() const { return this->name_; }
+  std::string guid() const { return this->guid_; }
+  bool sharingEnabled() const;
+  bool isPublic() const;
+  bool isPrivate() const;
 
-    std::wstring name_;
-    std::string guid_;
+  void enableAsPrivate();
+  void enableAsPublic();
 
-    INetConnection *conn_             = nullptr;
-    INetSharingManager *sharing_mgr_  = nullptr;
-    INetSharingConfiguration *config_ = nullptr;
-    INetConnectionProps *props_       = nullptr;
+ private:
+  void addRef();
+  void releaseRef();
+  bool valid();
+
+  std::wstring name_;
+  std::string guid_;
+
+  INetConnection *conn_             = nullptr;
+  INetSharingManager *sharing_mgr_  = nullptr;
+  INetSharingConfiguration *config_ = nullptr;
+  INetConnectionProps *props_       = nullptr;
 };
 }

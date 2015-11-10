@@ -14,34 +14,30 @@ using ui::MainWindow;
 using network::IcsService;
 
 Q_DECLARE_METATYPE(std::string);
-Q_DECLARE_METATYPE(WLAN_HOSTED_NETWORK_REASON);
 Q_DECLARE_METATYPE(std::shared_ptr<HostedWlan>);
 Q_DECLARE_METATYPE(std::shared_ptr<WlanHost>);
+Q_DECLARE_METATYPE(WLAN_HOSTED_NETWORK_REASON);
 Q_DECLARE_METATYPE(QVector<int>);
 
-void registerMetaTyeps()
-{
-    qRegisterMetaType<std::string>();
-    qRegisterMetaType<WLAN_HOSTED_NETWORK_REASON>();
-    qRegisterMetaType<std::shared_ptr<HostedWlan>>();
-    qRegisterMetaType<std::shared_ptr<WlanHost>>();
-    qRegisterMetaType<QVector<int>>();
+void registerMetaTyeps() {
+  qRegisterMetaType<std::string>();
+  qRegisterMetaType<std::shared_ptr<HostedWlan>>();
+  qRegisterMetaType<std::shared_ptr<WlanHost>>();
+  qRegisterMetaType<WLAN_HOSTED_NETWORK_REASON>();
+  qRegisterMetaType<QVector<int>>();
 }
 
-int main(int argc, char *argv[])
-{
-    registerMetaTyeps();
+int main(int argc, char *argv[]) {
+  registerMetaTyeps();
 
-    QApplication a(argc, argv);
-    a.setQuitOnLastWindowClosed(false);
+  QApplication a(argc, argv);
+  a.setQuitOnLastWindowClosed(false);
 
-    auto wlan = std::make_shared<HostedWlan>();
-    if (AppSettings::instance()->turn_on_initially)
-        wlan->turnOn();
+  auto wlan = std::make_shared<HostedWlan>();
+  if (AppSettings::instance()->turn_on_initially) wlan->turnOn();
 
-    MainWindow w(wlan);
-    if (!AppSettings::instance()->hide_window_initially)
-        w.show();
+  MainWindow w(wlan);
+  if (!AppSettings::instance()->hide_window_initially) w.show();
 
-    return a.exec();
+  return a.exec();
 }

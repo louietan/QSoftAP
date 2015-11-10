@@ -9,89 +9,80 @@ namespace sharing {
 
 using sharing::SharedResource;
 
-QString SharingService::getErrorString(DWORD code)
-{
-    char *err = nullptr;
-    switch (code)
-    {
+QString SharingService::getErrorString(DWORD code) {
+  char *err = nullptr;
+  switch (code) {
     case ERROR_ACCESS_DENIED:
-        err = "没有权限";
-        break;
+      err = "没有权限";
+      break;
     case ERROR_INVALID_LEVEL:
-        err = "ERROR_INVALID_LEVEL";
-        break;
+      err = "ERROR_INVALID_LEVEL";
+      break;
     case ERROR_INVALID_NAME:
-        err = "路径无效";
-        break;
+      err = "路径无效";
+      break;
     case NERR_DuplicateShare:
-        err = "该目录已经共享";
-        break;
+      err = "重复的共享";
+      break;
     case NERR_RedirectedPath:
-        err = "NERR_RedirectedPath";
-        break;
+      err = "NERR_RedirectedPath";
+      break;
     case ERROR_INVALID_PARAMETER:
-        err = "参数无效";
-        break;
+      err = "参数无效";
+      break;
     case NERR_UnknownDevDir:
-        err = "目录不存在";
-        break;
+      err = "目录不存在";
+      break;
     default:
-        return QString::fromLocal8Bit("错误码%1").arg(code);
+      return QString::fromLocal8Bit("错误码%1").arg(code);
+  }
+  return QString::fromLocal8Bit(err);
+}
+
+NET_API_STATUS SharingService::add(const SharedResource &res) {
+  SHARE_INFO_2 info     = {};
+  info.shi2_netname     = const_cast<LPWSTR>(res.name.c_str());
+  info.shi2_type        = res.type;
+  info.shi2_permissions = res.permissions;
+  info.shi2_path        = const_cast<LPWSTR>(res.path.c_str());
+  info.shi2_max_uses    = res.max_uses;
+  auto ret = NetShareAdd(nullptr, 2, reinterpret_cast<LPBYTE>(&info), nullptr);
+  if (ret == NERR_Success) emit this->sharesChanged();
+
+  return ret;
+}
+NET_API_STATUS SharingService::remove(const std::wstring &name) {
+  auto ret = NetShareDel(nullptr, const_cast<LPWSTR>(name.c_str()), 0);
+  if (ret == NERR_Success) emit this->sharesChanged();
+
+  return ret;
+}
+std::vector<SharedResource> SharingService::all() {
+  std::vector<SharedResource> entries;
+
+  PSHARE_INFO_2 info, cur;
+  NET_API_STATUS status;
+  DWORD read = 0, total = 0, resume = 0;
+  do {
+    status = NetShareEnum(nullptr, 2, reinterpret_cast<LPBYTE *>(&info),
+                          MAX_PREFERRED_LENGTH, &read, &total, &resume);
+    if (status == ERROR_SUCCESS || status == ERROR_MORE_DATA) {
+      cur = info;
+      for (auto i = 1; i <= read; i++) {
+        SharedResource item;
+        item.name        = cur->shi2_netname;
+        item.path        = cur->shi2_path;
+        item.permissions = cur->shi2_permissions;
+        item.type        = cur->shi2_type;
+        item.max_uses = cur->shi2_max_uses;
+        entries.push_back(item);
+
+        ++cur;
+      }
+      NetApiBufferFree(info);
     }
-    return QString::fromLocal8Bit(err);
-}
+  } while (status == ERROR_MORE_DATA);
 
-NET_API_STATUS SharingService::add(const SharedResource &res)
-{
-    SHARE_INFO_2 info     = {};
-    info.shi2_netname     = const_cast<LPWSTR>(res.name.c_str());
-    info.shi2_type        = res.type;
-    info.shi2_permissions = res.permissions;
-    info.shi2_path        = const_cast<LPWSTR>(res.path.c_str());
-    info.shi2_max_uses    = res.max_uses;
-    auto ret              = NetShareAdd(nullptr, 2, reinterpret_cast<LPBYTE>(&info), nullptr);
-    if (ret == NERR_Success)
-        emit this->sharesChanged();
-
-    return ret;
-}
-NET_API_STATUS SharingService::remove(const std::wstring &name)
-{
-    auto ret = NetShareDel(nullptr, const_cast<LPWSTR>(name.c_str()), 0);
-    if (ret == NERR_Success)
-        emit this->sharesChanged();
-
-    return ret;
-}
-std::vector<SharedResource> SharingService::all()
-{
-    std::vector<SharedResource> entries;
-
-    PSHARE_INFO_2 info, cur;
-    NET_API_STATUS status;
-    DWORD read = 0, total = 0, resume = 0;
-    do
-    {
-        status = NetShareEnum(nullptr, 2, reinterpret_cast<LPBYTE *>(&info), MAX_PREFERRED_LENGTH, &read, &total, &resume);
-        if (status == ERROR_SUCCESS || status == ERROR_MORE_DATA)
-        {
-            cur = info;
-            for (auto i = 1; i <= read; i++)
-            {
-                SharedResource item;
-                item.name        = cur->shi2_netname;
-                item.path        = cur->shi2_path;
-                item.permissions = cur->shi2_permissions;
-                item.type        = cur->shi2_type;
-                item.max_uses    = cur->shi2_max_uses;
-                entries.push_back(item);
-
-                ++cur;
-            }
-            NetApiBufferFree(info);
-        }
-    } while (status == ERROR_MORE_DATA);
-
-    return entries;
+  return entries;
 }
 }
