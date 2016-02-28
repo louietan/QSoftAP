@@ -23,7 +23,7 @@ class HostedWlan : public QObject,
   NON_COPYABLE(HostedWlan)
  public:
   static QString getErrorMsg(DWORD code);
-  static std::wstring getFailReason(WLAN_HOSTED_NETWORK_REASON code);
+  static std::string getFailReason(WLAN_HOSTED_NETWORK_REASON code);
 
   HostedWlan();
   ~HostedWlan();
@@ -73,7 +73,6 @@ class HostedWlan : public QObject,
   std::string adapterID() const { return this->adapter_id_; }
 
   WLAN_HOSTED_NETWORK_STATE state() const { return this->state_; }
-  QString stateInfo() const;
 
   /**
    * 虚拟wlan中的主机集合，键是mac

@@ -2,6 +2,7 @@
 
 #include <QFileSystemModel>
 #include <QCompleter>
+#include <QCoreApplication>
 #include <QMessageBox>
 
 #include <lmerr.h>
@@ -34,7 +35,7 @@ AddSharingDialog::AddSharingDialog(QWidget *parent) : QDialog(parent) {
       resource.name = this->ui_.txtName->text().toStdWString();
     auto ret = SharingService::instance()->add(resource);
     if (ret != NERR_Success) {
-      QMessageBox::critical(this, "error", SharingService::getErrorString(ret));
+      QMessageBox::critical(this, "error", QCoreApplication::translate(STR(SharingService), SharingService::getErrorString(ret).c_str()));
     } else {
       this->accept();
     }

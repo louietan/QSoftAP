@@ -66,6 +66,11 @@
     <Filter Include="Source Files\controllers">
       <UniqueIdentifier>{3f9e7c65-9f7f-41ef-a668-01e43da43e11}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Translation Files">
+      <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
+      <Extensions>ts</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -239,5 +244,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
+    <None Include="translations\zh_CN.ts">
+      <Filter>Translation Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

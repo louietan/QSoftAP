@@ -3,6 +3,8 @@
 #include <future>
 #include <sstream>
 
+#include <QCoreApplication>
+
 #include "network/net_utils.h"
 
 namespace ui {
@@ -109,7 +111,7 @@ void WlanHostTableModel::onPeerJoined(std::shared_ptr<HostedWlan>,
   in_addr ip     = {};
   ip.S_un.S_addr = NetUtils::findIpByMac(peer->peerState().PeerMacAddress);
   if (ip.S_un.S_addr == 0) {
-    this->setData(idx, QString::fromLocal8Bit("正在识别。。。"));
+    this->setData(idx, QCoreApplication::translate(STR(WlanHostTableModel), "obtaining IP address..."));
     auto fn_update_ip = [this](QByteArray mac) {
       for (auto i = 0; i < 10; ++i) {
         in_addr ipv4     = {};
@@ -131,7 +133,7 @@ void WlanHostTableModel::onPeerJoined(std::shared_ptr<HostedWlan>,
       for (auto itr = this->peers.begin(); itr != this->peers.end(); ++itr) {
         if (memcmp(std::get<0>(*itr).data(), mac.data(), mac.size()) == 0) {
           auto pos = this->index(itr - this->peers.begin(), 1);
-          this->setData(pos, QString::fromLocal8Bit("未识别"));
+          this->setData(pos, QCoreApplication::translate(STR(WlanHostTableModel), "failed to get the IP address"));
           break;
         }
       }

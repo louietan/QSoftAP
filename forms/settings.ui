@@ -34,7 +34,7 @@
    <enum>Qt::NoContextMenu</enum>
   </property>
   <property name="windowTitle">
-   <string>设置</string>
+   <string>settings</string>
   </property>
   <property name="modal">
    <bool>true</bool>
@@ -43,7 +43,7 @@
    <item>
     <widget class="QCheckBox" name="chkRunOnStartup">
      <property name="text">
-      <string>开机自启</string>
+      <string>starts with computer</string>
      </property>
     </widget>
    </item>
@@ -62,14 +62,14 @@
       </size>
      </property>
      <property name="text">
-      <string>启动时打开热点</string>
+      <string>turn on virutal WLAN when starts</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QCheckBox" name="chkHideWindowInitially">
      <property name="text">
-      <string>启动时隐藏窗口到托盘</string>
+      <string>hide to tray when starts</string>
      </property>
     </widget>
    </item>

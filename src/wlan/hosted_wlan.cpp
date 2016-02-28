@@ -13,6 +13,7 @@ using network::NetUtils;
 HostedWlan::HostedWlan() { this->init(); }
 
 HostedWlan::~HostedWlan() { this->release(); }
+
 void HostedWlan::wlanCallback(PWLAN_NOTIFICATION_DATA data, PVOID ctx) {
   auto self = static_cast<HostedWlan *>(ctx);
   switch (data->NotificationCode) {
@@ -208,114 +209,72 @@ DWORD HostedWlan::updateStatus() {
   return ret;
 }
 
-QString HostedWlan::stateInfo() const {
-  switch (this->state_) {
-    case wlan_hosted_network_unavailable:
-      return QString::fromLocal8Bit("功能被关闭");
-    case wlan_hosted_network_idle:
-      return QString::fromLocal8Bit("已关闭");
-    case wlan_hosted_network_active:
-      return QString::fromLocal8Bit("已打开");
-    default:
-      return "unknown state";
-  }
-}
-
 QString HostedWlan::getErrorMsg(DWORD code) {
   std::array<wchar_t, 500> buffer;
   WlanReasonCodeToString(code, buffer.size(), buffer.data(), nullptr);
   return QString::fromWCharArray(buffer.data());
 }
 
-std::wstring HostedWlan::getFailReason(WLAN_HOSTED_NETWORK_REASON code) {
-  const wchar_t *reason = nullptr;
+std::string HostedWlan::getFailReason(WLAN_HOSTED_NETWORK_REASON code) {
   switch (code) {
     case wlan_hosted_network_reason_unspecified:
-      reason = L"unspecified";
-      break;
+      return "unspecified";
     case wlan_hosted_network_reason_bad_parameters:
-      reason = L"非法参数";
-      break;
+      return "bad_parameters";
     case wlan_hosted_network_reason_service_shutting_down:
-      reason = L"服务正在停止";
-      break;
+      return "service_shutting_down";
     case wlan_hosted_network_reason_insufficient_resources:
-      reason = L"wlan_hosted_network_reason_insufficient_resources";
-      break;
+      return "wlan_hosted_network_reason_insufficient_resources";
     case wlan_hosted_network_reason_elevation_required:
-      reason = L"权限不够";
-      break;
+      return "elevation_required";
     case wlan_hosted_network_reason_read_only:
-      reason = L"read_only";
-      break;
+      return "read_only";
     case wlan_hosted_network_reason_persistence_failed:
-      reason = L"persistence_failed";
-      break;
+      return "persistence_failed";
     case wlan_hosted_network_reason_crypt_error:
-      reason = L"crypt_error";
-      break;
+      return "crypt_error";
     case wlan_hosted_network_reason_impersonation:
-      reason = L"impersonation";
-      break;
+      return "impersonation";
     case wlan_hosted_network_reason_stop_before_start:
-      reason = L"stop_before_start";
-      break;
+      return "stop_before_start";
     case wlan_hosted_network_reason_interface_available:
-      reason = L"interface_available";
-      break;
+      return "interface_available";
     case wlan_hosted_network_reason_interface_unavailable:
-      reason = L"interface_unavailable";
-      break;
+      return "interface_unavailable";
     case wlan_hosted_network_reason_miniport_stopped:
-      reason = L"miniport_stopped";
-      break;
+      return "miniport_stopped";
     case wlan_hosted_network_reason_miniport_started:
-      reason = L"miniport_started";
-      break;
+      return "miniport_started";
     case wlan_hosted_network_reason_incompatible_connection_started:
-      reason = L"incompatible_connection_started";
-      break;
+      return "incompatible_connection_started";
     case wlan_hosted_network_reason_incompatible_connection_stopped:
-      reason = L"incompatible_connection_stopped";
-      break;
+      return "incompatible_connection_stopped";
     case wlan_hosted_network_reason_user_action:
-      reason = L"user_action";
-      break;
+      return "user_action";
     case wlan_hosted_network_reason_client_abort:
-      reason = L"client_abort";
-      break;
+      return "client_abort";
     case wlan_hosted_network_reason_ap_start_failed:
-      reason = L"ap_start_failed";
-      break;
+      return "ap_start_failed";
     case wlan_hosted_network_reason_peer_arrived:
-      reason = L"peer_arrived";
-      break;
+      return "peer_arrived";
     case wlan_hosted_network_reason_peer_departed:
-      reason = L"peer_departed";
-      break;
+      return "peer_departed";
     case wlan_hosted_network_reason_peer_timeout:
-      reason = L"peer_timeout";
-      break;
+      return "peer_timeout";
     case wlan_hosted_network_reason_gp_denied:
-      reason = L"gp_denied";
-      break;
+      return "gp_denied";
     case wlan_hosted_network_reason_service_unavailable:
-      reason = L"service_unavailable";
-      break;
+      return "service_unavailable";
     case wlan_hosted_network_reason_device_change:
-      reason = L"device_change";
-      break;
+      return "device_change";
     case wlan_hosted_network_reason_properties_change:
-      reason = L"properties_change";
-      break;
+      return "properties_change";
     case wlan_hosted_network_reason_virtual_station_blocking_use:
-      reason = L"virtual_station_blocking_use";
-      break;
+      return "virtual_station_blocking_use";
     case wlan_hosted_network_reason_service_available_on_virtual_station:
-      reason = L"service_available_on_virtual_station";
-      break;
+      return "service_available_on_virtual_station";
+    default:
+      return "";
   }
-
-  return reason;
 }
 }

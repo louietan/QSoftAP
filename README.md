@@ -1,14 +1,25 @@
 QSoftAP
 =======
-用`C++11 + Qt5`写的windows虚拟wifi应用
 
-如果用qmake编译，记得添加以下导入库
+Main features
+=============
+
+- Virtual WLAN configuration
+- Internet connection sharing
+- Folder sharing management
+
+**The portable executable binaries are packed in [Release.7z](./Release.7z)**
+
+Screenshot
+==========
+
+![](./screen_shot.png)
+
+How to build
+============
+
+This project is developed using Visual Studio 2013 with Qt5 Add-in. For other build systems, you need to add the link commands for the following import libraries.
 - Iphlpapi.lib
 - Netapi32.lib
 - Wlanapi.lib
 - Ws2_32.lib
-
-#### [Release.7z](./Release.7z)中是编译好的可执行程序
-
-### 截图
-![](./screen_shot.png)
