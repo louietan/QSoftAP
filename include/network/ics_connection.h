@@ -32,7 +32,6 @@ class IcsConnection {
  private:
   void addRef();
   void releaseRef();
-  bool valid();
 
   std::wstring name_;
   std::string guid_;

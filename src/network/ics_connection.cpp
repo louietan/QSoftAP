@@ -19,6 +19,11 @@ IcsConnection::IcsConnection(INetConnection *conn, INetSharingManager *mgr)
       this->conn_, &this->config_);
   this->sharing_mgr_->get_NetConnectionProps(this->conn_, &this->props_);
   this->addRef();
+  // because the reference count is increased when it created,
+  // and is also increased in addRef method, so here we need to decrease the
+  // count.
+  this->config_->Release();
+  this->props_->Release();
 
   BSTR temp;
 
@@ -81,22 +86,23 @@ void IcsConnection::enableAsPublic() {
 }
 
 void IcsConnection::addRef() {
-  if (this->valid()) {
-    this->conn_->AddRef();
-    this->config_->AddRef();
-    this->props_->AddRef();
-  }
+  if (this->conn_) this->conn_->AddRef();
+  if (this->config_) this->config_->AddRef();
+  if (this->props_) this->props_->AddRef();
 }
 
 void IcsConnection::releaseRef() {
-  if (this->valid()) {
+  if (this->conn_) {
     this->conn_->Release();
-    this->config_->Release();
-    this->props_->Release();
+    this->conn_ = nullptr;
   }
-}
-
-bool IcsConnection::valid() {
-  return this->conn_ && this->config_ && this->props_;
+  if (this->config_) {
+    this->config_->Release();
+    this->config_ = nullptr;
+  }
+  if (this->props_) {
+    this->props_->Release();
+    this->props_ = nullptr;
+  }
 }
 }

@@ -44,6 +44,7 @@ void IcsService::reloadConnections() {
             ->QueryInterface(__uuidof(INetConnection), (void **)&pNetConnect);
         if (pNetConnect) {
           this->connections.push_back({pNetConnect, this->sharing_manager_});
+          pNetConnect->Release();
         }
       }
       VariantClear(&variant);
