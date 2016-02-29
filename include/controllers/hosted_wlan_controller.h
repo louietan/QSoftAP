@@ -20,7 +20,7 @@ class HostedWlanController {
    * @param[in] sharing_conn 共享连接的id，如果为空则取消共享
    * @return 错误消息，空串表示成功
    */
-  std::wstring applyConfigs(const std::string &ssid, const std::string &key,
+  QString applyConfigs(const std::string &ssid, const std::string &key,
                             const std::string &sharing_conn);
 
  private:

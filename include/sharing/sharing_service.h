@@ -26,7 +26,7 @@ class SharingService : public QObject {
   void sharesChanged();
 
  public:
-  static QString getErrorString(DWORD code);
+  static std::string getErrorString(DWORD code);
 
   NET_API_STATUS add(const SharedResource &res);
   NET_API_STATUS remove(const std::wstring &name);

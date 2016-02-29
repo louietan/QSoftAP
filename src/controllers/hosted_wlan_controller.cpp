@@ -1,4 +1,7 @@
 #include "controllers/hosted_wlan_controller.h"
+
+#include <QCoreApplication>
+
 #include "network/ics_service.h"
 #include "network/ics_connection.h"
 
@@ -8,23 +11,23 @@ using wlan::HostedWlan;
 using network::IcsService;
 using network::IcsConnection;
 
-std::wstring HostedWlanController::applyConfigs(
+QString HostedWlanController::applyConfigs(
     const std::string &ssid, const std::string &key,
     const std::string &sharing_conn) {
   auto trimmed = QString::fromStdString(ssid).trimmed();
-  if (trimmed.isEmpty()) return L"名称不能为空";
+  if (trimmed.isEmpty()) return QCoreApplication::translate(STR(HostedWlanController), "ssid can't be blank");
 
   if (key.length() < 8 || key.length() > 63)
-    return L"密码长度应为 8 到 63 个字节";
+    return QCoreApplication::translate(STR(HostedWlanController), "length of key should between 8 and 63");
 
   auto ret = this->wlan_->setEnabled(true);
   if (ret != wlan_hosted_network_reason_success) {
-    return HostedWlan::getFailReason(ret);
+    return QCoreApplication::translate(STR(HostedWlan), HostedWlan::getFailReason(ret).c_str());
   }
 
   ret = this->wlan_->setProperties(ssid.c_str(), key.c_str());
   if (ret != wlan_hosted_network_reason_success) {
-    return HostedWlan::getFailReason(ret);
+    return QCoreApplication::translate(STR(HostedWlan), HostedWlan::getFailReason(ret).c_str());
   }
 
   if (sharing_conn.empty()) {
@@ -36,6 +39,6 @@ std::wstring HostedWlanController::applyConfigs(
                                           this->wlan_->adapterID());
   }
 
-  return L"";
+  return "";
 }
 }

@@ -1,37 +1,43 @@
-#include <memory>
 #include <array>
+#include <memory>
 
-#include <QtWidgets/QApplication>
+#include <QApplication>
+#include <QTranslator>
 
+#include "app_settings.h"
 #include "network/ics_service.h"
 #include "ui/mainwindow.h"
 #include "wlan/hosted_wlan.h"
-#include "app_settings.h"
 
+using network::IcsService;
+using ui::MainWindow;
 using wlan::HostedWlan;
 using wlan::WlanHost;
-using ui::MainWindow;
-using network::IcsService;
 
-Q_DECLARE_METATYPE(std::string);
+Q_DECLARE_METATYPE(QVector<int>);
+Q_DECLARE_METATYPE(WLAN_HOSTED_NETWORK_REASON);
 Q_DECLARE_METATYPE(std::shared_ptr<HostedWlan>);
 Q_DECLARE_METATYPE(std::shared_ptr<WlanHost>);
-Q_DECLARE_METATYPE(WLAN_HOSTED_NETWORK_REASON);
-Q_DECLARE_METATYPE(QVector<int>);
+Q_DECLARE_METATYPE(std::string);
 
 void registerMetaTyeps() {
-  qRegisterMetaType<std::string>();
+  qRegisterMetaType<QVector<int>>();
+  qRegisterMetaType<WLAN_HOSTED_NETWORK_REASON>();
   qRegisterMetaType<std::shared_ptr<HostedWlan>>();
   qRegisterMetaType<std::shared_ptr<WlanHost>>();
-  qRegisterMetaType<WLAN_HOSTED_NETWORK_REASON>();
-  qRegisterMetaType<QVector<int>>();
+  qRegisterMetaType<std::string>();
 }
 
 int main(int argc, char *argv[]) {
   registerMetaTyeps();
 
-  QApplication a(argc, argv);
-  a.setQuitOnLastWindowClosed(false);
+  QApplication app(argc, argv);
+  app.setQuitOnLastWindowClosed(false);
+
+  QTranslator appTranslator;
+  appTranslator.load(QLocale::system().name() + ".qm",
+                     qApp->applicationDirPath() + "/languages");
+  app.installTranslator(&appTranslator);
 
   auto wlan = std::make_shared<HostedWlan>();
   if (AppSettings::instance()->turn_on_initially) wlan->turnOn();
@@ -39,5 +45,5 @@ int main(int argc, char *argv[]) {
   MainWindow w(wlan);
   if (!AppSettings::instance()->hide_window_initially) w.show();
 
-  return a.exec();
+  return app.exec();
 }

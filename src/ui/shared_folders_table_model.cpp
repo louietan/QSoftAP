@@ -41,9 +41,9 @@ QVariant SharedFoldersTableModel::headerData(int section,
   if (orientation == Qt::Orientation::Horizontal) {
     switch (section) {
       case 0:
-        return QString::fromLocal8Bit("Ãû³Æ");
+        return "name";
       case 1:
-        return QString::fromLocal8Bit("Â·¾¶");
+        return "folder path";
       default:
         return QVariant();
     }

@@ -19,7 +19,7 @@ IcsConnection::IcsConnection(INetConnection *conn, INetSharingManager *mgr)
       this->conn_, &this->config_);
   this->sharing_mgr_->get_NetConnectionProps(this->conn_, &this->props_);
   this->addRef();
-  // because the reference count is increased when it created,
+  // because the reference count is increased when the object is created,
   // and is also increased in addRef method, so here we need to decrease the
   // count.
   this->config_->Release();

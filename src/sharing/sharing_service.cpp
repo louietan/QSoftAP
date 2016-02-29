@@ -9,34 +9,25 @@ namespace sharing {
 
 using sharing::SharedResource;
 
-QString SharingService::getErrorString(DWORD code) {
-  char *err = nullptr;
+std::string SharingService::getErrorString(DWORD code) {
   switch (code) {
     case ERROR_ACCESS_DENIED:
-      err = "没有权限";
-      break;
+      return "ERROR_ACCESS_DENIED";
     case ERROR_INVALID_LEVEL:
-      err = "ERROR_INVALID_LEVEL";
-      break;
+      return "ERROR_INVALID_LEVEL";
     case ERROR_INVALID_NAME:
-      err = "路径无效";
-      break;
+      return "ERROR_INVALID_NAME";
     case NERR_DuplicateShare:
-      err = "重复的共享";
-      break;
+      return "NERR_DuplicateShare";
     case NERR_RedirectedPath:
-      err = "NERR_RedirectedPath";
-      break;
+      return "NERR_RedirectedPath";
     case ERROR_INVALID_PARAMETER:
-      err = "参数无效";
-      break;
+      return "ERROR_INVALID_PARAMETER";
     case NERR_UnknownDevDir:
-      err = "目录不存在";
-      break;
+      return "UnknownDevDir";
     default:
-      return QString::fromLocal8Bit("错误码%1").arg(code);
+      return QString("error code %1").arg(code).toStdString();
   }
-  return QString::fromLocal8Bit(err);
 }
 
 NET_API_STATUS SharingService::add(const SharedResource &res) {

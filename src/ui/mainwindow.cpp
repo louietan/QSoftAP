@@ -72,8 +72,8 @@ void MainWindow::closeEvent(QCloseEvent *event) {
 void MainWindow::on_btnSwitch_clicked() {
   auto err = this->wlan_->toggle();
   if (err != wlan_hosted_network_reason_success) {
-    auto msg = QString::fromLocal8Bit("切换失败 -_-# ：") +
-               QString::fromStdWString(HostedWlan::getFailReason(err));
+    auto msg = QString::fromLocal8Bit("failed -_-# ：") +
+               tr(HostedWlan::getFailReason(err).c_str());
     log(msg);
   } else {
     log(QString::fromLocal8Bit("OK :-)"));
@@ -101,8 +101,8 @@ void MainWindow::on_btnApplySettings_clicked() {
   }
 
   auto rslt = this->wlan_controller_.applyConfigs(ssid, key, sharing_conn);
-  if (!rslt.empty())
-    QMessageBox::critical(this, "error", QString::fromStdWString(rslt));
+  if (!rslt.isEmpty())
+    QMessageBox::critical(this, "error", rslt);
   else
     log(QString::fromLocal8Bit("OK :-)"));
 
@@ -144,21 +144,27 @@ void MainWindow::on_sharing_action() {
 
 void MainWindow::setupExtraUi() {
   this->ctx_menu_sharing_.setFont(this->ui_.menuBar->font());
-  this->ctx_menu_sharing_.addAction(QString::fromLocal8Bit("打开"), this,
-                                    SLOT(on_sharing_action()))
+  this->ctx_menu_sharing_.addAction(QCoreApplication::translate(
+                                        STR(MainWindowClass), "open"),
+                                    this, SLOT(on_sharing_action()))
       ->setData("open");
   this->ctx_menu_sharing_.addSeparator();
-  this->ctx_menu_sharing_.addAction(QString::fromLocal8Bit("添加"), this,
-                                    SLOT(on_sharing_action()))
+  this->ctx_menu_sharing_.addAction(QCoreApplication::translate(
+                                        STR(MainWindowClass), "new share"),
+                                    this, SLOT(on_sharing_action()))
       ->setData("add");
-  this->ctx_menu_sharing_.addAction(QString::fromLocal8Bit("移除"), this,
-                                    SLOT(on_sharing_action()))
+  this->ctx_menu_sharing_.addAction(QCoreApplication::translate(
+                                        STR(MainWindowClass), "stop sharing"),
+                                    this, SLOT(on_sharing_action()))
       ->setData("remove");
-  this->ctx_menu_sharing_.addAction(QString::fromLocal8Bit("移除全部"), this,
-                                    SLOT(on_sharing_action()))
+  this->ctx_menu_sharing_.addAction(
+                             QCoreApplication::translate(STR(MainWindowClass),
+                                                         "stop sharing all"),
+                             this, SLOT(on_sharing_action()))
       ->setData("remove_all");
-  this->ctx_menu_sharing_.addAction(QString::fromLocal8Bit("刷新"), this,
-                                    SLOT(on_sharing_action()))
+  this->ctx_menu_sharing_.addAction(QCoreApplication::translate(
+                                        STR(MainWindowClass), "refresh"),
+                                    this, SLOT(on_sharing_action()))
       ->setData("reload");
 
   this->ctx_menu_tray_.setFont(this->ui_.menuBar->font());
@@ -169,8 +175,9 @@ void MainWindow::setupExtraUi() {
   this->tray_.show();
 
   this->ctx_menu_peers_.setFont(this->ui_.menuBar->font());
-  this->ctx_menu_peers_.addAction(QString::fromLocal8Bit("刷新"), this,
-                                  SLOT(reloadPeers()));
+  this->ctx_menu_peers_.addAction(
+      QCoreApplication::translate(STR(MainWindowClass), "refresh"), this,
+      SLOT(reloadPeers()));
 }
 
 void MainWindow::connectViewSignals() {
@@ -188,8 +195,9 @@ void MainWindow::connectViewSignals() {
   connect(this->ui_.actionAbout, &QAction::triggered, [this](bool) {
     const auto url = "https://github.com/rubiest/QSoftAP";
     QMessageBox::about(
-        this, QString::fromLocal8Bit("关于"),
-        QString::fromLocal8Bit("源码：<a href='%1'>%1</a>").arg(url));
+        this, "about",
+        QCoreApplication::translate(STR(MainWindowClass), "source code") +
+            QString(": <a href='%1'>%1</a>").arg(url));
   });
   connect(&this->tray_, &QSystemTrayIcon::activated,
           [this](QSystemTrayIcon::ActivationReason reason) {
@@ -236,10 +244,10 @@ void MainWindow::keepViewSync() {
           [this](std::shared_ptr<HostedWlan> sender,
                  std::shared_ptr<WlanHost> peer) {
             this->updatePeersView();
-            std::ostringstream msg;
-            msg << peer->mac_address_hex << " 加入连接";
-            this->tray_.showMessage("",
-                                    QString::fromLocal8Bit(msg.str().c_str()));
+            this->tray_.showMessage(
+                "",
+                QCoreApplication::translate(STR(MainWindowClass), "%1 joined")
+                    .arg(peer->mac_address_hex.c_str()));
           },
           Qt::QueuedConnection);
 
@@ -249,10 +257,9 @@ void MainWindow::keepViewSync() {
   connect(this->wlan_.get(), &HostedWlan::peerLeaved,
           this, [this](std::shared_ptr<HostedWlan> sender, std::string mac) {
             this->updatePeersView();
-            std::ostringstream msg;
-            msg << mac << " 断开连接";
-            this->tray_.showMessage("",
-                                    QString::fromLocal8Bit(msg.str().c_str()));
+            this->tray_.showMessage("", QCoreApplication::translate(
+                                            STR(MainWindowClass), "%1 left")
+                                            .arg(mac.c_str()));
           }, Qt::QueuedConnection);
 
   connect(this->wlan_.get(), &HostedWlan::stateChanged,
@@ -271,11 +278,12 @@ void MainWindow::updateWlanView() {
       this->tray_.setIcon(this->ico_wifi_off_);
       this->setWindowIcon(this->ico_wifi_off_);
 
-      this->ui_.actionToggle->setText(QString::fromLocal8Bit("开启"));
+      this->ui_.actionToggle->setText(
+          QCoreApplication::translate(STR(MainWindowClass), "turn on"));
 
       auto ret = this->wlan_->setEnabled(TRUE);
       if (ret != wlan_hosted_network_reason_success)
-        this->log(QString::fromStdWString(this->wlan_->getFailReason(ret)));
+        this->log(tr(this->wlan_->getFailReason(ret).c_str()));
     } break;
     case wlan_hosted_network_active:
       this->ui_.btnSwitch->setChecked(true);
@@ -283,7 +291,8 @@ void MainWindow::updateWlanView() {
       this->tray_.setIcon(this->ico_wifi_on_);
       this->setWindowIcon(this->ico_wifi_on_);
 
-      this->ui_.actionToggle->setText(QString::fromLocal8Bit("关闭"));
+      this->ui_.actionToggle->setText(
+          QCoreApplication::translate(STR(MainWindowClass), "turn off"));
       break;
     case wlan_hosted_network_idle:
       this->ui_.btnSwitch->setChecked(false);
@@ -291,7 +300,8 @@ void MainWindow::updateWlanView() {
       this->tray_.setIcon(this->ico_wifi_off_);
       this->setWindowIcon(this->ico_wifi_off_);
 
-      this->ui_.actionToggle->setText(QString::fromLocal8Bit("开启"));
+      this->ui_.actionToggle->setText(
+          QCoreApplication::translate(STR(MainWindowClass), "turn on"));
     default:
       break;
   }
@@ -306,7 +316,8 @@ void MainWindow::updateWlanView() {
 
 void MainWindow::updatePeersView() {
   this->ui_.grpHosts->setTitle(
-      QString::fromLocal8Bit("主机列表（%1）").arg(this->wlan_->peers.size()));
+      QCoreApplication::translate(STR(MainWindowClass), "connected peers(%1)")
+          .arg(this->wlan_->peers.size()));
   this->ui_.tblvwHosts->setColumnHidden(1, true);
 }
 

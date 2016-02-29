@@ -13,3 +13,5 @@ public:                          \
 public:                          \
   CLASS(const CLASS &) = delete; \
   CLASS &operator=(const CLASS &) = delete;
+
+#define STR(EXPR) #EXPR
