@@ -28,9 +28,11 @@ void HostedWlan::wlanCallback(PWLAN_NOTIFICATION_DATA data, PVOID ctx) {
           static_cast<PWLAN_HOSTED_NETWORK_DATA_PEER_STATE_CHANGE>(data->pData);
       switch (info->PeerStateChangeReason) {
         case wlan_hosted_network_reason_peer_arrived: {
-          auto peer                          = std::make_shared<WlanHost>(info->NewState);
-          self->peers[peer->mac_address_hex] = peer;
-          emit self->peerJoined(self->shared_from_this(), peer);
+          auto peer = std::make_shared<WlanHost>(info->NewState);
+          if(self->peers.find(peer->mac_address_hex) == self->peers.end()) {
+            self->peers[peer->mac_address_hex] = peer;
+            emit self->peerJoined(self->shared_from_this(), peer);
+          }
         } break;
         case wlan_hosted_network_reason_peer_departed: {
           auto mac =

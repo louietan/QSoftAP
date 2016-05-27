@@ -1,5 +1,5 @@
-QSoftAP
-=======
+QSoftAP - A virtual WLAN utility for Windows 7 and above
+========================================================
 
 Main features
 =============
@@ -8,18 +8,24 @@ Main features
 - Internet connection sharing
 - Folder sharing management
 
-**The portable executable binaries are packed in [Release.7z](./Release.7z)**
-
 Screenshot
 ==========
 
 ![](./screen_shot.png)
 
-How to build
-============
+Using the release version
+=========================
 
-This project is developed using Visual Studio 2013 with Qt5 Add-in. For other build systems, you need to add the link commands for the following import libraries.
-- Iphlpapi.lib
-- Netapi32.lib
-- Wlanapi.lib
-- Ws2_32.lib
+- Install the [VC++ 2015 runtime library](https://www.microsoft.com/en-US/download/details.aspx?id=48145)
+- Download and unpack the compiled binaries from [Release.rar](./Release.rar), then **run the QSoftAP.exe as administrator**
+
+Build from source
+=================
+
+- Compiler: MSVC++ 14.0 (Visual Studio 2015)
+- This project is developed using Visual Studio 2015 with Qt5 Add-in. For other build systems e.g. qmake, you need to add the link commands for the following import libraries to your build script
+    - Iphlpapi.lib
+    - Netapi32.lib
+    - Wlanapi.lib
+    - Ws2_32.lib
+- Before debugging, you need to **run your IDE as administrator**
