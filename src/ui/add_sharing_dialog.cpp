@@ -35,7 +35,7 @@ AddSharingDialog::AddSharingDialog(QWidget *parent) : QDialog(parent) {
       resource.name = this->ui_.txtName->text().toStdWString();
     auto ret = SharingService::instance()->add(resource);
     if (ret != NERR_Success) {
-      QMessageBox::critical(this, "error", QCoreApplication::translate(STR(SharingService), SharingService::getErrorString(ret).c_str()));
+      QMessageBox::critical(this, "Error", QCoreApplication::translate(STR(SharingService), SharingService::getErrorString(ret).c_str()));
     } else {
       this->accept();
     }

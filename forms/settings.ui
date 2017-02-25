@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>191</width>
-    <height>87</height>
+    <width>411</width>
+    <height>122</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -34,7 +34,7 @@
    <enum>Qt::NoContextMenu</enum>
   </property>
   <property name="windowTitle">
-   <string>settings</string>
+   <string>Settings</string>
   </property>
   <property name="modal">
    <bool>true</bool>
@@ -43,7 +43,7 @@
    <item>
     <widget class="QCheckBox" name="chkRunOnStartup">
      <property name="text">
-      <string>starts with computer</string>
+      <string>Start With System</string>
      </property>
     </widget>
    </item>
@@ -62,14 +62,14 @@
       </size>
      </property>
      <property name="text">
-      <string>turn on virutal WLAN when starts</string>
+      <string>Turn On Virutal WLAN when Starts</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QCheckBox" name="chkHideWindowInitially">
      <property name="text">
-      <string>hide to tray when starts</string>
+      <string>Hide to Tray when Starts</string>
      </property>
     </widget>
    </item>

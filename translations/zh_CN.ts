@@ -4,11 +4,11 @@
     <context>
         <name>HostedWlanController</name>
         <message>
-            <source>ssid can't be blank</source>
+            <source>SSID can't be blank</source>
             <translation>名称不能为空</translation>
         </message>
         <message>
-            <source>length of key should between 8 and 63</source>
+            <source>Length of key should between 8 and 63</source>
             <translation>密码长度应该在 8 到 63 之间</translation>
         </message>
     </context>
@@ -54,22 +54,22 @@
         <name>AddSharingDialog</name>
         <message>
             <location filename="forms/add_sharing.ui" line="19"/>
-            <source>new share</source>
+            <source>New Share</source>
             <translation>添加共享</translation>
         </message>
         <message>
             <location filename="forms/add_sharing.ui" line="27"/>
-            <source>name</source>
+            <source>Name</source>
             <translation>名称</translation>
         </message>
         <message>
             <location filename="forms/add_sharing.ui" line="34"/>
-            <source>optional</source>
+            <source>Optional</source>
             <translation>可不填</translation>
         </message>
         <message>
             <location filename="forms/add_sharing.ui" line="44"/>
-            <source>folder path</source>
+            <source>Folder Path</source>
             <translation>路径</translation>
         </message>
     </context>
@@ -77,92 +77,92 @@
         <name>MainWindowClass</name>
         <message>
             <location filename="forms/mainwindow.ui" line="69"/>
-            <source>virtual WLAN configs</source>
+            <source>Virtual WLAN Settings</source>
             <translation>虚拟热点配置</translation>
         </message>
         <message>
             <location filename="forms/mainwindow.ui" line="89"/>
-            <source>ssid</source>
+            <source>SSID</source>
             <translation>名称</translation>
         </message>
         <message>
             <location filename="forms/mainwindow.ui" line="103"/>
-            <source>key</source>
+            <source>Key</source>
             <translation>密码</translation>
         </message>
         <message>
             <location filename="forms/mainwindow.ui" line="124"/>
-            <source>enable internet connection sharing</source>
+            <source>Enable Internet Connection Sharing</source>
             <translation>使用共享</translation>
         </message>
         <message>
             <location filename="forms/mainwindow.ui" line="198"/>
-            <source>apply</source>
+            <source>Apply</source>
             <translation>应用设置</translation>
         </message>
         <message>
             <location filename="forms/mainwindow.ui" line="271"/>
-            <source>connected peers(%1)</source>
+            <source>Connected Peers(%1)</source>
             <translation>主机列表（%1）</translation>
         </message>
         <message>
             <location filename="forms/mainwindow.ui" line="311"/>
-            <source>shared folders</source>
+            <source>Shared Folders</source>
             <translation>共享文件夹</translation>
         </message>
         <message>
             <location filename="forms/mainwindow.ui" line="326"/>
-            <source>right click to show the menu</source>
+            <source>Right Click to Show the Menu</source>
             <translation>右击管理</translation>
         </message>
         <message>
             <location filename="forms/mainwindow.ui" line="383"/>
-            <source>help</source>
+            <source>Help</source>
             <translation>帮助</translation>
         </message>
         <message>
             <location filename="forms/mainwindow.ui" line="395"/>
-            <source>app</source>
-            <translation>程序</translation>
+            <source>File</source>
+            <translation>文件</translation>
         </message>
         <message>
             <location filename="forms/mainwindow.ui" line="405"/>
-            <source>settings</source>
+            <source>Settings</source>
             <translation>设置</translation>
         </message>
         <message>
             <location filename="forms/mainwindow.ui" line="418"/>
             <location filename="forms/mainwindow.ui" line="421"/>
-            <source>about</source>
+            <source>About</source>
             <translation>关于</translation>
         </message>
         <message>
             <location filename="forms/mainwindow.ui" line="432"/>
-            <source>exit</source>
+            <source>Exit</source>
             <translation>退出</translation>
         </message>
         <message>
-            <source>open</source>
+            <source>Open</source>
             <translation>打开</translation>
         </message>
         <message>
-            <source>new share</source>
+            <source>New Share</source>
             <translation>添加共享</translation>
         </message>
         <message>
-            <source>stop sharing</source>
+            <source>Stop Sharing</source>
             <translation>移除</translation>
         </message>
         <message>
-            <source>stop sharing all</source>
+            <source>Stop Sharing All</source>
             <translation>全部移除</translation>
         </message>
         <message>
-            <source>refresh</source>
+            <source>Refresh</source>
             <translation>刷新</translation>
         </message>
         <message>
-            <source>source code</source>
+            <source>Source Code</source>
             <translation>源码</translation>
         </message>
         <message>
@@ -174,22 +174,22 @@
             <translation>%1 断开连接</translation>
         </message>
         <message>
-            <source>turn on</source>
+            <source>Turn On</source>
             <translation>开启</translation>
         </message>
         <message>
-            <source>turn off</source>
+            <source>Turn Off</source>
             <translation>关闭</translation>
         </message>
     </context>
     <context>
         <name>WlanHostTableModel</name>
         <message>
-            <source>obtaining IP address...</source>
+            <source>Obtaining IP address...</source>
             <translation>正在获取IP。。。</translation>
         </message>
         <message>
-            <source>failed to get the IP address</source>
+            <source>Failed to get the IP address</source>
             <translation>获取IP失败</translation>
         </message>
     </context>
@@ -197,22 +197,22 @@
         <name>SettingsDialog</name>
         <message>
             <location filename="forms/settings.ui" line="37"/>
-            <source>settings</source>
+            <source>Settings</source>
             <translation>设置</translation>
         </message>
         <message>
             <location filename="forms/settings.ui" line="46"/>
-            <source>starts with computer</source>
+            <source>Start with system</source>
             <translation>开机自启</translation>
         </message>
         <message>
             <location filename="forms/settings.ui" line="65"/>
-            <source>turn on virutal WLAN when starts</source>
+            <source>Turn on virutal WLAN when starts</source>
             <translation>启动时打开热点</translation>
         </message>
         <message>
             <location filename="forms/settings.ui" line="72"/>
-            <source>hide to tray when starts</source>
+            <source>Hide to tray when starts</source>
             <translation>启动时隐藏窗口到托盘</translation>
         </message>
     </context>

@@ -15,10 +15,10 @@ QString HostedWlanController::applyConfigs(
     const std::string &ssid, const std::string &key,
     const std::string &sharing_conn) {
   auto trimmed = QString::fromStdString(ssid).trimmed();
-  if (trimmed.isEmpty()) return QCoreApplication::translate(STR(HostedWlanController), "ssid can't be blank");
+  if (trimmed.isEmpty()) return QCoreApplication::translate(STR(HostedWlanController), "SSID can't be blank");
 
   if (key.length() < 8 || key.length() > 63)
-    return QCoreApplication::translate(STR(HostedWlanController), "length of key should between 8 and 63");
+    return QCoreApplication::translate(STR(HostedWlanController), "Length of key should be between 8 and 63");
 
   auto ret = this->wlan_->setEnabled(true);
   if (ret != wlan_hosted_network_reason_success) {
