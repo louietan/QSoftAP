@@ -107,6 +107,9 @@ void WlanHostTableModel::onPeerJoined(std::shared_ptr<HostedWlan>,
   auto mac_addr =
       QByteArray(reinterpret_cast<char *>(peer->peerState().PeerMacAddress));
   this->setData(idx, mac_addr);
+
+ 
+
   idx            = this->index(row, 1);
   in_addr ip     = {};
   ip.S_un.S_addr = NetUtils::findIpByMac(peer->peerState().PeerMacAddress);
@@ -121,6 +124,8 @@ void WlanHostTableModel::onPeerJoined(std::shared_ptr<HostedWlan>,
                ++itr) {
             if (memcmp(std::get<0>(*itr).data(), mac.data(), mac.size()) == 0) {
               auto pos = this->index(itr - this->peers.begin(), 1);
+              //QString strmacaddr = mac;
+              //this->setData(pos, QString::fromLocal8Bit(inet_ntoa(ipv4)) + QString("(") + strmacaddr + QString(")"));
               this->setData(pos, QString::fromLocal8Bit(inet_ntoa(ipv4)));
               return;
             }

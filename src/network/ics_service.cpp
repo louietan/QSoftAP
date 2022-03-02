@@ -29,6 +29,8 @@ void IcsService::reloadConnections() {
   // enumerate connections
   IEnumVARIANT *pEV = NULL;
   IUnknown *pUnk = NULL;
+  if (collect!=NULL)
+  {
   collect->get__NewEnum(&pUnk);
   if (pUnk) {
     pUnk->QueryInterface(__uuidof(IEnumVARIANT), (void **)&pEV);
@@ -52,6 +54,7 @@ void IcsService::reloadConnections() {
     pEV->Release();
   }  // end if
   collect->Release();
+  }
   ///
 
   emit reloadFinished(*this);
