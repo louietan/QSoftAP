@@ -4,7 +4,7 @@
 #include <QCompleter>
 #include <QCoreApplication>
 #include <QMessageBox>
-
+#include <QRegularExpression>
 #include <lmerr.h>
 
 #include "sharing/sharing_service.h"
