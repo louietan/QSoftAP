@@ -145,7 +145,12 @@ void WlanHostTableModel::onPeerJoined(std::shared_ptr<HostedWlan>,
     };
     std::async(fn_update_ip, mac_addr);
   } else
-    this->setData(idx, QString::fromLocal8Bit(inet_ntoa(ip)));
+  {
+    QString strmacaddr = mac_addr;
+		QString stripmac = QString::fromLocal8Bit (inet_ntoa (ip)) + QString ("(") + strmacaddr + QString (")");
+		this->setData (idx, stripmac);
+  }
+  
 }
 
 void WlanHostTableModel::onPeerLeaved(std::shared_ptr<HostedWlan>,
