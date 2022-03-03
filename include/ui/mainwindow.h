@@ -11,6 +11,7 @@
 #include "ui/shared_folders_table_model.h"
 #include "wlan/hosted_wlan.h"
 #include "controllers/hosted_wlan_controller.h"
+#include "network/ics_service.h"
 
 namespace ui {
 
@@ -33,6 +34,7 @@ class MainWindow : public QMainWindow {
   void on_sharing_action();
 
   void reloadPeers();
+  void reloadFinished(network::IcsService& sender);
 
  private:
   void setupExtraUi();
