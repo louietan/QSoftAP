@@ -13,12 +13,12 @@ class HostedWlanController {
       : wlan_(hosted_wlan) {}
 
   /**
-   * Ó¦ÓÃÅäÖÃ
+   * åº”ç”¨é…ç½®
    * 
    * @param[in] ssid
    * @param[in] key
-   * @param[in] sharing_conn ¹²ÏíÁ¬½ÓµÄid£¬Èç¹ûÎª¿ÕÔòÈ¡Ïû¹²Ïí
-   * @return ´íÎóÏûÏ¢£¬¿Õ´®±íÊ¾³É¹¦
+   * @param[in] sharing_conn å…±äº«è¿æ¥çš„idï¼Œå¦‚æœä¸ºç©ºåˆ™å–æ¶ˆå…±äº«
+   * @return é”™è¯¯æ¶ˆæ¯ï¼Œç©ºä¸²è¡¨ç¤ºæˆåŠŸ
    */
   QString applyConfigs(const std::string &ssid, const std::string &key,
                             const std::string &sharing_conn);

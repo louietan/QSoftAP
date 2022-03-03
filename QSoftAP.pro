@@ -29,6 +29,7 @@ DISTFILES += \
 INCLUDEPATH =./include
 
 HEADERS += \
+    Resources/version.rc \
     include/app_settings.h \
     include/commons.h \
     include/controllers/hosted_wlan_controller.h \
@@ -62,3 +63,4 @@ SOURCES += \
     src/wlan/wlan_host.cpp
 
 LIBS+=wlanapi.lib netapi32.lib oleaut32.lib  Ws2_32.lib Iphlpapi.lib ole32.lib
+

@@ -28,7 +28,7 @@ void IcsService::reloadConnections()
     INetSharingEveryConnectionCollection *collect = nullptr;
     hr=this->sharing_manager_->get_EnumEveryConnection(&collect);
 
-    /// Õª×ÔÍøÂç£¬ÉÔ×öĞŞ¸Ä
+    /// æ‘˜è‡ªç½‘ç»œï¼Œç¨åšä¿®æ”¹
     INetConnection *pNetConnect = NULL;  // fill this out for part 2 below
     // enumerate connections
     IEnumVARIANT *pEV = NULL;

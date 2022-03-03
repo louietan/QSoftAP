@@ -9,14 +9,14 @@
 namespace sharing {
 
 /**
- * ±íÊ¾Ò»¸ö¹²Ïí×ÊÔ´
+ * è¡¨ç¤ºä¸€ä¸ªå…±äº«èµ„æº
  */
 struct SharedResource {
   std::wstring name;
   std::wstring path;
 
   /**
-   * ×ÊÔ´ÀàĞÍ
+   * èµ„æºç±»å‹
    *
    * STYPE_DISKTREE:Disk drive.
    * STYPE_PRINTQ:Print queue.

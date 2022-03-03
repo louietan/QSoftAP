@@ -77,7 +77,7 @@ void MainWindow::on_btnSwitch_clicked()
 {
     auto err = this->wlan_->toggle();
     if (err != wlan_hosted_network_reason_success) {
-        auto msg = QString::fromLocal8Bit("Failed -_-# £º") +
+        auto msg = QString::fromLocal8Bit("Failed -_-# ï¼š") +
                    tr(HostedWlan::getFailReason(err).c_str());
         log(msg);
     } else {

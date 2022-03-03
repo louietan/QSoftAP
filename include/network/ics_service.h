@@ -12,7 +12,7 @@ namespace network {
 
 class IcsConnection;
 
-//Ìá¹©ICS¹ÜÀíµÄ¹¦ÄÜ
+//æä¾›ICSç®¡ç†çš„åŠŸèƒ½
 class IcsService : public QObject {
   Q_OBJECT
 
@@ -23,26 +23,26 @@ class IcsService : public QObject {
   void reloadConnections();
 
   /**
-   * ÆôÓÃ¹²Ïí
+   * å¯ç”¨å…±äº«
    *
-   * @param[in] pub ×÷ÎªpublicÁ¬½ÓµÄguid
-   * @param[in] prv ×÷ÎªprivateÁ¬½ÓµÄguid
+   * @param[in] pub ä½œä¸ºpublicè¿æ¥çš„guid
+   * @param[in] prv ä½œä¸ºprivateè¿æ¥çš„guid
    */
   void enableSharing(const std::string &pub, const std::string &prv);
   void disableAll();
 
   /**
-   * ¸ù¾İidÕÒÁ¬½Ó
+   * æ ¹æ®idæ‰¾è¿æ¥
    *
    * @param[in] id
    * @param[out] result
-   * @return ÊÇ·ñÕÒµ½
+   * @return æ˜¯å¦æ‰¾åˆ°
    */
   bool findById(const std::string &id, IcsConnection &result);
   std::vector<IcsConnection> connections;
 
  signals:
-  //Á¬½Ó¼ÓÔØÍêºó·¢³ö
+  //è¿æ¥åŠ è½½å®Œåå‘å‡º
   void reloadFinished(IcsService &sender);
 
  protected:

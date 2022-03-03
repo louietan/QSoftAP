@@ -22,7 +22,7 @@ std::string NetUtils::readableMacAddress(unsigned char bytes[], size_t len,
 }
 
 DWORD NetUtils::findIpByMac(unsigned char mac[6]) {
-  //´Óarp±íÀïÕÒ
+  //ä»Žarpè¡¨é‡Œæ‰¾
   ULONG size = sizeof(MIB_IPNETTABLE);
   std::unique_ptr<MIB_IPNETTABLE> arp_table(
       static_cast<MIB_IPNETTABLE *>(malloc(size)));

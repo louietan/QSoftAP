@@ -54,9 +54,9 @@ void HostedWlan::init() {
 
   WlanHostedNetworkInitSettings(this->client_handle_, nullptr, nullptr);
 
-  //×¢²á»Øµ÷
+  //æ³¨å†Œå›è°ƒ
   WlanRegisterNotification(this->client_handle_,
-                           WLAN_NOTIFICATION_SOURCE_HNWK,  //Ö»¼àÌıÍĞ¹ÜÍøÂç
+                           WLAN_NOTIFICATION_SOURCE_HNWK,  //åªç›‘å¬æ‰˜ç®¡ç½‘ç»œ
                            TRUE, WLAN_NOTIFICATION_CALLBACK(&wlanCallback),
                            this, nullptr, nullptr);
 }
@@ -77,7 +77,7 @@ WLAN_HOSTED_NETWORK_REASON HostedWlan::setProperties(const std::string &ssid,
   connection_info.dwMaxNumberOfPeers                      = dwMaxNumberOfPeers;
   connection_info.hostedNetworkSSID                       = dot11_ssid;
 
-  //ÉèÖÃÁ¬½ÓĞÅÏ¢
+  //è®¾ç½®è¿æ¥ä¿¡æ¯
   WLAN_HOSTED_NETWORK_REASON reason;
   auto ret = WlanHostedNetworkSetProperty(
       this->client_handle_, wlan_hosted_network_opcode_connection_settings,
@@ -86,13 +86,13 @@ WLAN_HOSTED_NETWORK_REASON HostedWlan::setProperties(const std::string &ssid,
   if (ret != ERROR_SUCCESS || reason != wlan_hosted_network_reason_success)
     return reason;
 
-  //ÉèÖÃÃÜÔ¿
+  //è®¾ç½®å¯†é’¥
   ret = WlanHostedNetworkSetSecondaryKey(
       this->client_handle_,
-      key.length() + 1,  //ÒªËãÉÏÖÕ½á·û'\0'
+      key.length() + 1,  //è¦ç®—ä¸Šç»ˆç»“ç¬¦'\0'
       PUCHAR(key.data()),
-      TRUE,  //ÕâÀï±íÊ¾´«ÈëµÄÃÜÔ¿ÊÇÃ÷ÎÄÃÜÂë¡£ÃÜÔ¿ÓĞÁ½ÖÖĞÎÊ½£º8µ½63¸ö×Ö½Ú »ò
-      // 64¸öÊ®Áù½øÖÆÊı×Ö£¨¼´32×Ö½Ú£©
+      TRUE,  //è¿™é‡Œè¡¨ç¤ºä¼ å…¥çš„å¯†é’¥æ˜¯æ˜æ–‡å¯†ç ã€‚å¯†é’¥æœ‰ä¸¤ç§å½¢å¼ï¼š8åˆ°63ä¸ªå­—èŠ‚ æˆ–
+      // 64ä¸ªåå…­è¿›åˆ¶æ•°å­—ï¼ˆå³32å­—èŠ‚ï¼‰
       TRUE, &reason, nullptr);
 
   if (ret == ERROR_SUCCESS && reason == wlan_hosted_network_reason_success) {
@@ -135,7 +135,7 @@ DWORD HostedWlan::updateProperties() {
   PUCHAR pkey = nullptr;
   BOOL bIsPassPhrase;
   BOOL bPersistent;
-  //²éÃÜÔ¿
+  //æŸ¥å¯†é’¥
   auto ret = WlanHostedNetworkQuerySecondaryKey(this->client_handle_, &key_len,
                                                 &pkey, &bIsPassPhrase,
                                                 &bPersistent, nullptr, nullptr);
@@ -152,7 +152,7 @@ DWORD HostedWlan::updateProperties() {
   DWORD data_size;
   PVOID data = nullptr;
   WLAN_OPCODE_VALUE_TYPE wlanOpcodeValueType;
-  //²éÁ¬½ÓĞÅÏ¢
+  //æŸ¥è¿æ¥ä¿¡æ¯
   ret = WlanHostedNetworkQueryProperty(
       this->client_handle_, wlan_hosted_network_opcode_connection_settings,
       &data_size, &data, &wlanOpcodeValueType, nullptr);
@@ -206,7 +206,7 @@ DWORD HostedWlan::updateStatus() {
     memcpy(this->mac_address_, status->wlanHostedNetworkBSSID,
            sizeof(this->mac_address_));
 
-    WlanFreeMemory(status);  //±ğÍüÁËÊÍ·ÅÄÚ´æ
+    WlanFreeMemory(status);  //åˆ«å¿˜äº†é‡Šæ”¾å†…å­˜
   }
   return ret;
 }

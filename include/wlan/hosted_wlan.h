@@ -14,7 +14,7 @@
 namespace wlan {
 
 /**
- * ÍĞ¹ÜWLAN£¬¶Ônative apiµÄ·â×°
+ * æ‰˜ç®¡WLANï¼Œå¯¹native apiçš„å°è£…
  */
 class HostedWlan : public QObject,
                    public std::enable_shared_from_this<HostedWlan> {
@@ -29,45 +29,45 @@ class HostedWlan : public QObject,
   ~HostedWlan();
 
   /**
-   * ÉèÖÃÊôĞÔ
+   * è®¾ç½®å±æ€§
    */
   WLAN_HOSTED_NETWORK_REASON setProperties(const std::string &ssid,
                                            const std::string &key,
                                            DWORD dwMaxNumberOfPeers = 100);
 
   /**
-   * ÉèÖÃÊÇ·ñÆôÓÃ
+   * è®¾ç½®æ˜¯å¦å¯ç”¨
    *
-   * @param enable,TURE »ò FALSE
+   * @param enable,TURE æˆ– FALSE
    */
   WLAN_HOSTED_NETWORK_REASON setEnabled(BOOL enable);
 
-  //´ò¿ª
+  //æ‰“å¼€
   WLAN_HOSTED_NETWORK_REASON turnOn();
 
-  //¹Ø±Õ
+  //å…³é—­
   WLAN_HOSTED_NETWORK_REASON turnOff();
 
-  //ÔÚ¡°¿ª¡±¡¢¡°¹Ø¡±¼äÇĞ»»
+  //åœ¨â€œå¼€â€ã€â€œå…³â€é—´åˆ‡æ¢
   WLAN_HOSTED_NETWORK_REASON toggle();
 
   /**
-   * ÖØĞÂ¶ÁÈ¡ÉèÖÃĞÅÏ¢¡£°üÀ¨ssid£¬ÃÜÂëµÈ.
+   * é‡æ–°è¯»å–è®¾ç½®ä¿¡æ¯ã€‚åŒ…æ‹¬ssidï¼Œå¯†ç ç­‰.
    *
-   * @return ·µ»Ø´íÎóÂë£¬³É¹¦ÎªERROR_SUCCESS¡£¿ÉÍ¨¹ıgetErrorMsg»ñÈ¡ÎÄ×ÖÃèÊö
+   * @return è¿”å›é”™è¯¯ç ï¼ŒæˆåŠŸä¸ºERROR_SUCCESSã€‚å¯é€šè¿‡getErrorMsgè·å–æ–‡å­—æè¿°
    */
   DWORD updateProperties();
 
   /**
-   * ¸üĞÂµ±Ç°×´Ì¬.
+   * æ›´æ–°å½“å‰çŠ¶æ€.
    *
-   * @return ·µ»Ø´íÎóÂë£¬³É¹¦ÎªERROR_SUCCESS¡£¿ÉÍ¨¹ıgetErrorMsg»ñÈ¡ÎÄ×ÖÃèÊö
+   * @return è¿”å›é”™è¯¯ç ï¼ŒæˆåŠŸä¸ºERROR_SUCCESSã€‚å¯é€šè¿‡getErrorMsgè·å–æ–‡å­—æè¿°
    */
   DWORD updateStatus();
 
   std::string ssid() const { return this->ssid_; }
 
-  //»ñÈ¡ÃÜÔ¿
+  //è·å–å¯†é’¥
   std::string secondaryKey() const { return this->secondary_key_; }
 
   std::string adapterID() const { return this->adapter_id_; }
@@ -75,17 +75,17 @@ class HostedWlan : public QObject,
   WLAN_HOSTED_NETWORK_STATE state() const { return this->state_; }
 
   /**
-   * ĞéÄâwlanÖĞµÄÖ÷»ú¼¯ºÏ£¬¼üÊÇmac
+   * è™šæ‹Ÿwlanä¸­çš„ä¸»æœºé›†åˆï¼Œé”®æ˜¯mac
    */
   std::map<std::string, std::shared_ptr<WlanHost>> peers;
 
  signals:
-  //ÓĞÖ÷»ú¼ÓÈë
+  //æœ‰ä¸»æœºåŠ å…¥
   void peerJoined(std::shared_ptr<HostedWlan> sender,
                   std::shared_ptr<WlanHost> peer);
-  //ÓĞÖ÷»ú¶Ï¿ª
+  //æœ‰ä¸»æœºæ–­å¼€
   void peerLeaved(std::shared_ptr<HostedWlan> sender, std::string mac);
-  //ĞéÄâwifi×´Ì¬·¢Éú¸Ä±ä
+  //è™šæ‹ŸwifiçŠ¶æ€å‘ç”Ÿæ”¹å˜
   void stateChanged(std::shared_ptr<HostedWlan> sender);
 
  private:

@@ -7,20 +7,20 @@
 namespace network {
 
 /**
- * Ìá¹©ÍøÂçÏà¹ØµÄ¹¤¾ßº¯Êı
+ * æä¾›ç½‘ç»œç›¸å…³çš„å·¥å…·å‡½æ•°
  */
 class NetUtils {
  public:
   /**
-   * °ÑmacµØÖ·×ª³É16½øÖÆ×Ö·û´®ĞÎÊ½
+   * æŠŠmacåœ°å€è½¬æˆ16è¿›åˆ¶å­—ç¬¦ä¸²å½¢å¼
    */
   static std::string readableMacAddress(unsigned char bytes[], size_t len = 6,
                                         char delim = '-');
 
   /**
-   * ¸ù¾İmacÈ¡ip
+   * æ ¹æ®macå–ip
    *
-   * @param[in] mac 6¸ö×Ö½Ú,²»ÊÇÊ®Áù½øÖÆ×Ö·û´®
+   * @param[in] mac 6ä¸ªå­—èŠ‚,ä¸æ˜¯åå…­è¿›åˆ¶å­—ç¬¦ä¸²
    */
   static DWORD findIpByMac(unsigned char mac[6]);
 };
