@@ -61,6 +61,8 @@ SOURCES += \
     src/wlan/hosted_wlan.cpp \
     src/wlan/wlan_host.cpp
 
+TRANSLATIONS=translations/zh_CN.ts
+
 LIBS+=wlanapi.lib netapi32.lib oleaut32.lib  Ws2_32.lib Iphlpapi.lib ole32.lib
 
 DESTDIR = ./x64/bin/
