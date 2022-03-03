@@ -29,7 +29,6 @@ DISTFILES += \
 INCLUDEPATH =./include
 
 HEADERS += \
-    Resources/version.rc \
     include/app_settings.h \
     include/commons.h \
     include/controllers/hosted_wlan_controller.h \
@@ -64,3 +63,23 @@ SOURCES += \
 
 LIBS+=wlanapi.lib netapi32.lib oleaut32.lib  Ws2_32.lib Iphlpapi.lib ole32.lib
 
+DESTDIR = ./x64/bin/
+##配置中增加文件拷贝选项
+#CONFIG += file_copies
+ 
+##定义需要增加的文件
+## $$PWD表示工程源代码所在目录
+## $$OUT_PWD表示发布软件坐在目录
+## .files规定文件名或文件夹名
+## .path规定发布目标地址
+## addfile和adddir为自定义变量名称
+ 
+#addfile.files = $$PWD/filename
+#addfile.path = $$OUT_PWD/
+ 
+#adddir.files = $$PWD/dirname
+#adddir.path = $$OUT_PWD/
+ 
+## COPIES增加需要拷贝的文件或文件夹
+#COPIES += addfile
+#COPIES += adddir
