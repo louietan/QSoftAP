@@ -101,7 +101,7 @@
     <message>
         <location filename="../forms/mainwindow.ui" line="35"/>
         <source>QSoftAP</source>
-        <translation type="unfinished">软路由热点</translation>
+        <translation>软路由热点</translation>
     </message>
     <message>
         <location filename="../forms/mainwindow.ui" line="124"/>
@@ -247,6 +247,14 @@
     <message>
         <source>Failed to get the IP address</source>
         <translation type="vanished">获取IP失败</translation>
+    </message>
+</context>
+<context>
+    <name>ui::MainWindow</name>
+    <message>
+        <location filename="../src/ui/mainwindow.cpp" line="313"/>
+        <source>Turn On</source>
+        <translation type="unfinished">开启</translation>
     </message>
 </context>
 </TS>
