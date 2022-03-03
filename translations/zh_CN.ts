@@ -101,7 +101,7 @@
     <message>
         <location filename="../forms/mainwindow.ui" line="35"/>
         <source>QSoftAP</source>
-        <translation>QSoftAP</translation>
+        <translation type="unfinished">软路由热点</translation>
     </message>
     <message>
         <location filename="../forms/mainwindow.ui" line="124"/>
