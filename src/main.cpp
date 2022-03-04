@@ -4,6 +4,8 @@
 #include <QApplication>
 #include <QTranslator>
 #include <QDebug>
+#include <QMessageBox>
+#include <QObject>
 
 #include "app_settings.h"
 #include "network/ics_service.h"
@@ -30,6 +32,29 @@ void registerMetaTyeps()
 	qRegisterMetaType<std::string>();
 }
 
+BOOL IsRunasAdmin()
+{
+	BOOL bElevated = FALSE;
+	HANDLE hToken = nullptr;
+
+	// Get current process token
+	if (!OpenProcessToken (GetCurrentProcess(), TOKEN_QUERY, &hToken))
+	{ return FALSE; }
+
+	TOKEN_ELEVATION tokenEle;
+	DWORD dwRetLen = 0;
+
+	// Retrieve token elevation information
+	if (GetTokenInformation (hToken, TokenElevation, &tokenEle, sizeof (tokenEle), &dwRetLen)) {
+		if (dwRetLen == sizeof (tokenEle)) {
+			bElevated = tokenEle.TokenIsElevated;
+		}
+	}
+
+	CloseHandle (hToken);
+	return bElevated;
+}
+
 int main (int argc, char* argv[])
 {
 	registerMetaTyeps();
@@ -44,13 +69,32 @@ int main (int argc, char* argv[])
 						qApp->applicationDirPath() + "/languages");
 	app.installTranslator (&appTranslator);
 
+
 	auto wlan = std::make_shared<HostedWlan>();
 
 	if (AppSettings::instance()->turn_on_initially) { wlan->turnOn(); }
 
 	MainWindow w (wlan);
 
-	if (!AppSettings::instance()->hide_window_initially) { w.show(); }
+	if (!AppSettings::instance()->hide_window_initially) {
+		w.show();
+
+
+		if (IsRunasAdmin() != TRUE) {
+
+			QMessageBox msgBox;
+			msgBox.setText (QCoreApplication::translate (
+								STR (QSoftAP), "Warning."));
+			msgBox.setInformativeText (QCoreApplication::translate (
+										   STR (QSoftAP), "You must run app with administrator privileges!"));
+			msgBox.setStandardButtons (QMessageBox::Ok);
+			msgBox.setDefaultButton (QMessageBox::Ok);
+			int ret = msgBox.exec();
+
+
+			return ret;
+		}
+	}
 
 	return app.exec();
 }

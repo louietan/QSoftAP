@@ -63,7 +63,7 @@ SOURCES += \
 
 TRANSLATIONS=translations/zh_CN.ts
 
-LIBS+=wlanapi.lib netapi32.lib oleaut32.lib  Ws2_32.lib Iphlpapi.lib ole32.lib
+LIBS+=wlanapi.lib netapi32.lib oleaut32.lib  Ws2_32.lib Iphlpapi.lib ole32.lib Advapi32.lib
 
 DESTDIR = ./x64/bin/
 ##配置中增加文件拷贝选项
