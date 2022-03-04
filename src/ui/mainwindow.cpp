@@ -332,8 +332,7 @@ void MainWindow::updateWlanView()
 		this->tray_.setIcon (this->ico_wifi_off_);
 		this->setWindowIcon (this->ico_wifi_off_);
 
-		this->ui_.actionToggle->setText (
-			QCoreApplication::translate (STR (MainWindowClass), "Turn On"));
+		this->ui_.actionToggle->setText (tr( "Turn On"));
 
 	default:
 		break;
