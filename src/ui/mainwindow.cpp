@@ -214,7 +214,7 @@ void MainWindow::connectViewSignals()
 	connect (this->ui_.actionAbout, &QAction::triggered, [this] (bool) {
 		const auto url = "https://github.com/ghmole/QSoftAP";
 		QMessageBox::about (
-			this, "About",
+			this, tr ("About"),
 			QCoreApplication::translate (STR (MainWindowClass), "Source Code") +
 			QString (": <a href='%1'>%1</a>").arg (url));
 	});
@@ -332,7 +332,7 @@ void MainWindow::updateWlanView()
 		this->tray_.setIcon (this->ico_wifi_off_);
 		this->setWindowIcon (this->ico_wifi_off_);
 
-		this->ui_.actionToggle->setText (tr( "Turn On"));
+		this->ui_.actionToggle->setText (tr ("Turn On"));
 
 	default:
 		break;

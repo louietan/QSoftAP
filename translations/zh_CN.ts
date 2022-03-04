@@ -252,9 +252,15 @@
 <context>
     <name>ui::MainWindow</name>
     <message>
-        <location filename="../src/ui/mainwindow.cpp" line="313"/>
+        <location filename="../src/ui/mainwindow.cpp" line="310"/>
+        <location filename="../src/ui/mainwindow.cpp" line="335"/>
         <source>Turn On</source>
-        <translation type="unfinished">开启</translation>
+        <translation>开启热点</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/mainwindow.cpp" line="326"/>
+        <source>Turn Off</source>
+        <translation>关闭热点</translation>
     </message>
 </context>
 </TS>
