@@ -254,7 +254,7 @@
     <message>
         <location filename="../src/ui/mainwindow.cpp" line="218"/>
         <source>About</source>
-        <translation type="unfinished">关于</translation>
+        <translation>关于</translation>
     </message>
     <message>
         <location filename="../src/ui/mainwindow.cpp" line="311"/>
