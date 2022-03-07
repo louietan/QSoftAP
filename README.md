@@ -19,7 +19,7 @@ How to use it?
 
 - Download the [binary package](./release.7z) and unpack it
 - Install `vcredist_x86.exe`(vc++ 2013 runtime)
-- Run `QSoftAP.exe` as administrator
+- Run `QSoftAP.exe` as <font color='red'> administrator </font>
 
 How to build the source code?
 =============================
@@ -32,3 +32,8 @@ How to build the source code?
   - Wlanapi.lib
   - Ws2_32.lib
 - For debugging, you have to **run your IDE as administrator**
+
+What it can't do?
+=============================
+- permit/allow wifi client
+- statistics of client traffic
