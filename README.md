@@ -1,4 +1,4 @@
-QSoftAP - A virtual WLAN utility for Windows 7 and above
+QSoftAP - A QT based virtual WLAN utility for Windows 7 and above
 ========================================================
 
 What does it do?
@@ -6,6 +6,8 @@ What does it do?
 
 - Set up virtual WLAN(wireless local network), by which you can share resources (like files, internet connection) with your mobile or other PCs
 - Manage shared folders easily
+- QT 5.15.2 & 6.2.3 build successfully
+- msvc 2019 & qt creater tested
 
 Screenshot
 ==========
