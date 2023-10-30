@@ -10,7 +10,7 @@
 namespace wlan {
 
 /**
- * ±íÊ¾ĞéÄâwlanÖĞµÄÒ»Ì¨Ö÷»ú
+ * è¡¨ç¤ºè™šæ‹Ÿwlanä¸­çš„ä¸€å°ä¸»æœº
  */
 class WlanHost {
  public:

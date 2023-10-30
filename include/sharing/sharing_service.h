@@ -16,7 +16,7 @@ namespace sharing {
 struct SharedResource;
 
 /**
- * Ìá¹©¹ÜÀí×ÊÔ´¹²Ïí¹¦ÄÜ¡£¶Ônative apiµÄ¼òµ¥·â×°
+ * æä¾›ç®¡ç†èµ„æºå…±äº«åŠŸèƒ½ã€‚å¯¹native apiçš„ç®€å•å°è£…
  */
 class SharingService : public QObject {
   Q_OBJECT
